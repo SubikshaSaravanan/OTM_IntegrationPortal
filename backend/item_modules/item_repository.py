@@ -1,6 +1,6 @@
 from sqlalchemy import text
 from datetime import datetime
-from ..database import db
+from database import db
 
 
 def save_item(payload: dict, created_by: int):

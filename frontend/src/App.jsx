@@ -6,7 +6,11 @@ import Landing from "./Pages/Landing";
 import Invoice from "./Pages/Invoice";
 import InvoiceJson from "./Pages/InvoiceJson";
 import InvoiceTemplate from "./Pages/InvoiceTemplate";
+import InvoiceJson from "./Pages/InvoiceJson";
+import InvoiceTemplate from "./Pages/InvoiceTemplate";
 import Items from "./Pages/ItemCreate";
+import Setting from "./Pages/FieldConfigManager";
+
 import Setting from "./Pages/FieldConfigManager";
 
 import Navbar from "./components/Navbar";

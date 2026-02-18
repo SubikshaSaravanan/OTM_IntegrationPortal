@@ -83,7 +83,6 @@ const ItemCreate = () => {
     } finally { setSubmitting(false); }
   };
 
-
   const renderSectionFields = (sectionId) => {
     const sectionFields = config.filter(c => (c.section || 'core').toLowerCase() === sectionId.toLowerCase());
 
