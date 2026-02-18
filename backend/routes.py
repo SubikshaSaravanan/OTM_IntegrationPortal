@@ -371,6 +371,41 @@ def get_dashboard_modules():
                 "is_app": item.get("is_app", False)
             })
 
+            # Add summary stats for Invoice modules
+            if item["name"] == "invoices":
+                # XML Counts
+                x_total = Invoice.query.filter_by(source_type="XML").count()
+                x_success = Invoice.query.filter_by(source_type="XML", status="PROCESSED").count()
+                x_error = Invoice.query.filter_by(source_type="XML", status="ERROR").count()
+                
+                # JSON Counts
+                j_total = Invoice.query.filter_by(source_type="JSON").count()
+                j_success = Invoice.query.filter_by(source_type="JSON", status="PROCESSED").count()
+                j_error = Invoice.query.filter_by(source_type="JSON", status="ERROR").count()
+                
+                module["summary"] = [
+                    {"label": "Total", "value": x_total, "icon": "FileText", "color": "text-indigo-300", "source": "XML"},
+                    {"label": "Success", "value": x_success, "icon": "CheckCircle", "color": "text-emerald-300", "source": "XML"},
+                    {"label": "Error", "value": x_error, "icon": "AlertCircle", "color": "text-rose-300", "source": "XML"},
+                    {"label": "Total", "value": j_total, "icon": "FilePlus", "color": "text-cyan-300", "source": "JSON"},
+                    {"label": "Success", "value": j_success, "icon": "CheckCircle", "color": "text-emerald-300", "source": "JSON"},
+                    {"label": "Error", "value": j_error, "icon": "AlertCircle", "color": "text-rose-300", "source": "JSON"}
+                ]
+            elif item["name"] == "invoice_json":
+                total = Invoice.query.filter_by(source_type="JSON").count()
+                success = Invoice.query.filter_by(source_type="JSON", status="PROCESSED").count()
+                error = Invoice.query.filter_by(source_type="JSON", status="ERROR").count()
+                pending = Invoice.query.filter_by(source_type="JSON", status="RECEIVED").count()
+                module["summary"] = [
+                    {"label": "Total", "value": total, "icon": "FilePlus", "color": "text-cyan-300", "source": "JSON"},
+                    {"label": "Success", "value": success, "color": "text-emerald-300", "icon": "CheckCircle", "source": "JSON"},
+                    {"label": "Error", "value": error, "color": "text-rose-300", "icon": "AlertCircle", "source": "JSON"},
+                    {"label": "Pending", "value": pending, "color": "text-amber-300", "icon": "Clock", "source": "JSON"}
+                ]
+
             modules[category].append(module)
 
-    return jsonify(modules)
+    return jsonify({
+        "version": "1.1-SUMMARY",
+        "data": modules
+    })
