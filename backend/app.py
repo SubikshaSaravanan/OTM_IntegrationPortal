@@ -40,6 +40,12 @@ def create_app():
     app.register_blueprint(invoice_upload_routes, url_prefix="/api")
     app.register_blueprint(tracking_bp, url_prefix="/api/tracking")
 
+    # Auto-create all tables on first run (ensures users, invoices, etc. exist in production)
+    with app.app_context():
+        import models  # noqa: F401 — ensure all models are registered
+        from item_modules.item_model import FieldConfig, Template  # noqa: F401
+        db.create_all()
+
     return app
 
 
