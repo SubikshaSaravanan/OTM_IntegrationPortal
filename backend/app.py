@@ -8,15 +8,15 @@ try:
 except ImportError:
     pass  # On Render, env vars are set directly — dotenv not needed
 
-from .database import db, migrate
-from .config import Config
+from database import db, migrate
+from config import Config
 
 # ✅ SINGLE SOURCE OF TRUTH FOR INVOICES
-from .routes import bp
-from .auth import auth_bp
-from .item_modules.item_routes import item_bp
-from .invoice_upload_routes import invoice_upload_routes
-from .tracking_routes import tracking_bp
+from routes import bp
+from auth import auth_bp
+from item_modules.item_routes import item_bp
+from invoice_upload_routes import invoice_upload_routes
+from tracking_routes import tracking_bp
 
 
 def create_app():
