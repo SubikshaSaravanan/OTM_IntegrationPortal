@@ -46,6 +46,15 @@ def create_app():
         from item_modules.item_model import FieldConfig, Template  # noqa: F401
         db.create_all()
 
+        # Auto-seed default admin user if no users exist
+        from models import User
+        if User.query.count() == 0:
+            admin = User(username="admin", role="admin")
+            admin.set_password("admin123")
+            db.session.add(admin)
+            db.session.commit()
+            print("✅ Default admin user seeded: username=admin, password=admin123")
+
     return app
 
 
