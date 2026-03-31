@@ -84,6 +84,7 @@ class InvoiceJson(db.Model):
     )
 
 
+
 class OtmObjectMetadata(db.Model):
     __tablename__ = "otm_object_metadata"
 
@@ -104,3 +105,22 @@ class MetadataField(db.Model):
     path = db.Column(db.String(255))
     data_type = db.Column(db.String(50))
     is_required = db.Column(db.Boolean, default=False)
+
+class PhysicalInvoiceAudit(db.Model):
+    __tablename__ = "physical_invoice_audit"
+
+    id = db.Column(db.Integer, primary_key=True)
+    invoice_xid = db.Column(db.String(100))
+    invoice_num = db.Column(db.String(100))
+    transmission_no = db.Column(db.String(50))
+    
+    ocr_raw_text = db.Column(db.Text)
+    llm_parsed_json = db.Column(db.JSON)
+    user_modified_json = db.Column(db.JSON)
+    final_otm_payload = db.Column(db.JSON)
+    otm_raw_response = db.Column(db.Text)
+    
+    status = db.Column(db.String(50))
+    error_message = db.Column(db.Text)
+    
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)

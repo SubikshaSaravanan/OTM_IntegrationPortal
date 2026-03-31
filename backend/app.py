@@ -12,6 +12,8 @@ from .config import Config
 from .routes import bp
 from .auth import auth_bp
 from .item_modules.item_routes import item_bp
+from .invoice_upload_routes import invoice_upload_routes
+from .tracking_routes import tracking_bp
 
 
 def create_app():
@@ -32,6 +34,8 @@ def create_app():
     app.register_blueprint(bp, url_prefix="/api")
     app.register_blueprint(auth_bp, url_prefix="/api/auth")
     app.register_blueprint(item_bp, url_prefix="/api/items")
+    app.register_blueprint(invoice_upload_routes, url_prefix="/api")
+    app.register_blueprint(tracking_bp, url_prefix="/api/tracking")
 
     return app
 

@@ -5,7 +5,7 @@ import axios from "axios";
 ====================================================== */
 
 const api = axios.create({
-  baseURL: "http://localhost:5000/api"
+  baseURL: import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api"
 });
 
 /* ======================================================
@@ -48,8 +48,9 @@ export const deleteInvoice = (id) => {
 ====================================================== */
 
 export const viewXML = (id) => {
+  const baseUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api";
   window.open(
-    `http://localhost:5000/api/xml/${id}`,
+    `${baseUrl}/xml/${id}`,
     "_blank"
   );
 };

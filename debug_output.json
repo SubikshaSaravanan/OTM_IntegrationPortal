@@ -1,0 +1,77 @@
+Fetching: https://otmgtm-test-hipro.otmgtm.us-phoenix-1.ocs.oraclecloud.com/logisticsRestApi/resources-int/v2/documents/INTL.DOC_SHIPMENT_111000_1774714612/contents?expand=all
+Status: 200
+{
+  "hasMore": false,
+  "limit": 25,
+  "count": 1,
+  "offset": 0,
+  "items": [
+    {
+      "documentContentGid": "DOC_SHIPMENT_111000_1774714612_C",
+      "domainName": "INTL",
+      "insertDate": {
+        "value": "2026-03-28T16:17:11Z"
+      },
+      "isAwaitingVirusCheck": false,
+      "links": [
+        {
+          "rel": "canonical",
+          "href": "https://otmgtm-test-hipro.otmgtm.us-phoenix-1.ocs.oraclecloud.com:443/logisticsRestApi/resources-int/v2/custom-actions/download/documents/INTL.DOC_SHIPMENT_111000_1774714612/contents/DOC_SHIPMENT_111000_1774714612_C"
+        },
+        {
+          "rel": "self",
+          "href": "https://otmgtm-test-hipro.otmgtm.us-phoenix-1.ocs.oraclecloud.com:443/logisticsRestApi/resources-int/v2/documents/INTL.DOC_SHIPMENT_111000_1774714612/contents/DOC_SHIPMENT_111000_1774714612_C"
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "rel": "parent",
+      "href": "https://otmgtm-test-hipro.otmgtm.us-phoenix-1.ocs.oraclecloud.com:443/logisticsRestApi/resources-int/v2/documents/INTL.DOC_SHIPMENT_111000_1774714612"
+    },
+    {
+      "rel": "self",
+      "href": "https://otmgtm-test-hipro.otmgtm.us-phoenix-1.ocs.oraclecloud.com:443/logisticsRestApi/resources-int/v2/documents/INTL.DOC_SHIPMENT_111000_1774714612/contents"
+    }
+  ]
+}
+
+Fetching: https://otmgtm-test-hipro.otmgtm.us-phoenix-1.ocs.oraclecloud.com/logisticsRestApi/resources-int/v2/documents/INTL.DOC_SHIPMENT_111000_1774714612/contents
+Status: 200
+{
+  "hasMore": false,
+  "limit": 25,
+  "count": 1,
+  "offset": 0,
+  "items": [
+    {
+      "documentContentGid": "DOC_SHIPMENT_111000_1774714612_C",
+      "domainName": "INTL",
+      "insertDate": {
+        "value": "2026-03-28T16:17:11Z"
+      },
+      "isAwaitingVirusCheck": false,
+      "links": [
+        {
+          "rel": "canonical",
+          "href": "https://otmgtm-test-hipro.otmgtm.us-phoenix-1.ocs.oraclecloud.com:443/logisticsRestApi/resources-int/v2/custom-actions/download/documents/INTL.DOC_SHIPMENT_111000_1774714612/contents/DOC_SHIPMENT_111000_1774714612_C"
+        },
+        {
+          "rel": "self",
+          "href": "https://otmgtm-test-hipro.otmgtm.us-phoenix-1.ocs.oraclecloud.com:443/logisticsRestApi/resources-int/v2/documents/INTL.DOC_SHIPMENT_111000_1774714612/contents/DOC_SHIPMENT_111000_1774714612_C"
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "rel": "parent",
+      "href": "https://otmgtm-test-hipro.otmgtm.us-phoenix-1.ocs.oraclecloud.com:443/logisticsRestApi/resources-int/v2/documents/INTL.DOC_SHIPMENT_111000_1774714612"
+    },
+    {
+      "rel": "self",
+      "href": "https://otmgtm-test-hipro.otmgtm.us-phoenix-1.ocs.oraclecloud.com:443/logisticsRestApi/resources-int/v2/documents/INTL.DOC_SHIPMENT_111000_1774714612/contents"
+    }
+  ]
+}

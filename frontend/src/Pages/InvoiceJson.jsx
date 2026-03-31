@@ -41,12 +41,12 @@ const generateInvoiceIds = () => {
    REFERENCE NUMBER QUALIFIERS
 ===================================================== */
 const REFNUM_QUALS = [
-  "21","61","62","63","64",
-  "8","9","98","99",
-  "AC","AF","AO","AW",
-  "B4","BD","BI","BJ","BK","BL","BM","BN",
-  "BS","BT",
-  "CF","CG"
+  "21", "61", "62", "63", "64",
+  "8", "9", "98", "99",
+  "AC", "AF", "AO", "AW",
+  "B4", "BD", "BI", "BJ", "BK", "BL", "BM", "BN",
+  "BS", "BT",
+  "CF", "CG"
 ];
 
 /* =====================================================
@@ -69,7 +69,7 @@ const SERVICE_PROVIDER_QUALS = [
 ];
 
 export default function InvoiceJson() {
-  
+
   const [mode, setMode] = useState("json");
   const autoIds = generateInvoiceIds();
 
@@ -217,8 +217,8 @@ export default function InvoiceJson() {
   };
 
   /* ================= UI ================= */
-    return (
-  <div className="min-h-screen bg-slate-100 px-6 py-8">
+  return (
+    <div className="min-h-screen bg-slate-100 px-6 py-8">
 
       {/* ===== TOGGLE ===== */}
       <InvoiceToggle mode="json" />
@@ -229,143 +229,143 @@ export default function InvoiceJson() {
       {/* ===== FORM ===== */}
       <div className="bg-white p-8 rounded shadow max-w-7xl mx-auto">
 
-        
 
 
-          <h2 className="text-2xl font-bold mb-6">
-            Create Invoice (JSON)
-          </h2>
 
-          {success && (
-            <div className="bg-green-100 border border-green-400 text-green-700 p-4 rounded mb-4">
-              <b>✅ Invoice Created Successfully</b>
-              <p>Invoice XID: {success.invoiceXid}</p>
-              <p>Invoice Number: {success.invoiceNumber}</p>
-              {success.invoiceGid && (
-                <p className="text-sm break-all mt-1">
-                  OTM GID: {success.invoiceGid}
-                </p>
-              )}
-            </div>
-          )}
+        <h2 className="text-2xl font-bold mb-6">
+          Create Invoice (JSON)
+        </h2>
 
-          {error && (
-            <div className="bg-red-100 border border-red-400 text-red-700 p-4 rounded mb-4">
-              ❌ {error}
-            </div>
-          )}
+        {success && (
+          <div className="bg-green-100 border border-green-400 text-green-700 p-4 rounded mb-4">
+            <b>✅ Invoice Created Successfully</b>
+            <p>Invoice XID: {success.invoiceXid}</p>
+            <p>Invoice Number: {success.invoiceNumber}</p>
+            {success.invoiceGid && (
+              <p className="text-sm break-all mt-1">
+                OTM GID: {success.invoiceGid}
+              </p>
+            )}
+          </div>
+        )}
 
-      {/* HEADER */}
-      <div className="grid grid-cols-3 gap-4 mb-6">
+        {error && (
+          <div className="bg-red-100 border border-red-400 text-red-700 p-4 rounded mb-4">
+            ❌ {error}
+          </div>
+        )}
 
-        <input className="border p-2 bg-gray-100" value={header.invoiceXid} readOnly />
-        <input className="border p-2 bg-gray-100" value={header.invoiceNumber} readOnly />
+        {/* HEADER */}
+        <div className="grid grid-cols-3 gap-4 mb-6">
 
-        <select
-          className="border p-2"
-          value={header.servprovAliasQualGid}
-          onChange={e =>
-            setHeader({ ...header, servprovAliasQualGid: e.target.value })
-          }
+          <input className="border p-2 bg-gray-100" value={header.invoiceXid} readOnly />
+          <input className="border p-2 bg-gray-100" value={header.invoiceNumber} readOnly />
+
+          <select
+            className="border p-2"
+            value={header.servprovAliasQualGid}
+            onChange={e =>
+              setHeader({ ...header, servprovAliasQualGid: e.target.value })
+            }
+          >
+            <option value="">Alias Qualifier</option>
+            {SERVICE_PROVIDER_QUALS.map(q => (
+              <option key={q} value={q}>{q}</option>
+            ))}
+          </select>
+
+          <input
+            className="border p-2"
+            placeholder="Alias Value"
+            value={header.servprovAliasValue}
+            onChange={e =>
+              setHeader({ ...header, servprovAliasValue: e.target.value })
+            }
+          />
+
+          <select
+            className="border p-2"
+            value={header.invoiceType}
+            onChange={e =>
+              setHeader({ ...header, invoiceType: e.target.value })
+            }
+          >
+            <option>STANDARD</option>
+            <option>PARENT</option>
+            <option>CHILD</option>
+          </select>
+
+          <select
+            className="border p-2"
+            value={header.currencyGid}
+            onChange={e =>
+              setHeader({ ...header, currencyGid: e.target.value })
+            }
+          >
+            <option>INR</option>
+            <option>USD</option>
+            <option>EUR</option>
+            <option>GBP</option>
+            <option>AED</option>
+            <option>SGD</option>
+          </select>
+        </div>
+
+        {/* REFNUM */}
+        <h3 className="font-semibold mb-2">Reference Number</h3>
+
+        <div className="grid grid-cols-3 gap-4 mb-6">
+          <select
+            className="border p-2"
+            value={refnum.qual}
+            onChange={e =>
+              setRefnum({ ...refnum, qual: e.target.value })
+            }
+          >
+            {REFNUM_QUALS.map(q => (
+              <option key={q}>{q}</option>
+            ))}
+          </select>
+
+          <input
+            className="border p-2"
+            placeholder="Reference Value"
+            onChange={e =>
+              setRefnum({ ...refnum, value: e.target.value })
+            }
+          />
+        </div>
+
+        {/* LINE ITEMS */}
+        <button
+          onClick={addLine}
+          className="bg-indigo-600 text-white px-4 py-2 rounded mb-4"
         >
-          <option value="">Alias Qualifier</option>
-          {SERVICE_PROVIDER_QUALS.map(q => (
-            <option key={q} value={q}>{q}</option>
-          ))}
-        </select>
+          + Add Line Item
+        </button>
 
-        <input
-          className="border p-2"
-          placeholder="Alias Value"
-          value={header.servprovAliasValue}
-          onChange={e =>
-            setHeader({ ...header, servprovAliasValue: e.target.value })
-          }
-        />
+        {lineItems.map((li, i) => (
+          <LineItemForm
+            key={i}
+            item={li}
+            onChange={(k, v) => updateLine(i, k, v)}
 
-        <select
-          className="border p-2"
-          value={header.invoiceType}
-          onChange={e =>
-            setHeader({ ...header, invoiceType: e.target.value })
-          }
-        >
-          <option>STANDARD</option>
-          <option>PARENT</option>
-          <option>CHILD</option>
-        </select>
+          />
+        ))}
 
-        <select
-          className="border p-2"
-          value={header.currencyGid}
-          onChange={e =>
-            setHeader({ ...header, currencyGid: e.target.value })
-          }
-        >
-          <option>INR</option>
-          <option>USD</option>
-          <option>EUR</option>
-          <option>GBP</option>
-          <option>AED</option>
-          <option>SGD</option>
-        </select>
-      </div>
-
-      {/* REFNUM */}
-      <h3 className="font-semibold mb-2">Reference Number</h3>
-
-      <div className="grid grid-cols-3 gap-4 mb-6">
-        <select
-          className="border p-2"
-          value={refnum.qual}
-          onChange={e =>
-            setRefnum({ ...refnum, qual: e.target.value })
-          }
-        >
-          {REFNUM_QUALS.map(q => (
-            <option key={q}>{q}</option>
-          ))}
-        </select>
-
-        <input
-          className="border p-2"
-          placeholder="Reference Value"
-          onChange={e =>
-            setRefnum({ ...refnum, value: e.target.value })
-          }
-        />
-      </div>
-
-      {/* LINE ITEMS */}
-      <button
-        onClick={addLine}
-        className="bg-indigo-600 text-white px-4 py-2 rounded mb-4"
-      >
-        + Add Line Item
-      </button>
-
-      {lineItems.map((li, i) => (
-        <LineItemForm
-          key={i}
-          item={li}
-          onChange={(k, v) => updateLine(i, k, v)}
-          
-        />
-      ))}
-
-      <button
-        onClick={submit}
-        disabled={loading}
-        className={`mt-6 px-10 py-3 rounded text-white transition-all
+        <button
+          onClick={submit}
+          disabled={loading}
+          className={`mt-6 px-10 py-3 rounded text-white transition-all
           ${loading
-            ? "bg-gray-400"
-            : "bg-green-600 hover:bg-green-700 active:scale-95"
-          }`}
-      >
-        {loading ? "Creating Invoice..." : "Create Invoice in OTM"}
-      </button>
+              ? "bg-gray-400"
+              : "bg-green-600 hover:bg-green-700 active:scale-95"
+            }`}
+        >
+          {loading ? "Creating Invoice..." : "Create Invoice in OTM"}
+        </button>
 
+      </div>
     </div>
-  </div>
-);
+  );
 }

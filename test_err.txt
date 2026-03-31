@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "<string>", line 3, in <module>
+    client = create_app().test_client()
+  File "C:\Users\subik\AppData\Roaming\Python\Python314\site-packages\flask\app.py", line 950, in test_client
+    return cls(  # type: ignore
+        self, self.response_class, use_cookies=use_cookies, **kwargs
+    )
+  File "C:\Users\subik\AppData\Roaming\Python\Python314\site-packages\flask\testing.py", line 118, in __init__
+    "HTTP_USER_AGENT": f"werkzeug/{werkzeug.__version__}",
+                                   ^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'werkzeug' has no attribute '__version__'

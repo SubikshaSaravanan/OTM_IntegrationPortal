@@ -31,6 +31,12 @@ class Config:
         "/logisticsRestApi/resources-int/v2"
     )
 
+    # Public REST API – used for Documents (resources-int does NOT allow document creation)
+    OTM_PUBLIC_REST_URL = (
+        "https://otmgtm-test-hipro.otmgtm.us-phoenix-1.ocs.oraclecloud.com"
+        "/logisticsRestApi/resources/v2"
+    )
+
     # 👉 NEW: Invoice metadata endpoint
     OTM_INVOICE_METADATA_URL = (
         OTM_REST_URL + "/metadata-catalog/invoices"

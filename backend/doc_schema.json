@@ -1,0 +1,1778 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "OTM REST API Documentation",
+    "version": "v2"
+  },
+  "paths": {
+    "/documents": {
+      "get": {
+        "tags": [
+          "Business Objects/Documents"
+        ],
+        "summary": "Get Documents",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/expand"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          },
+          {
+            "$ref": "#/components/parameters/orderBy"
+          },
+          {
+            "$ref": "#/components/parameters/fields"
+          },
+          {
+            "$ref": "#/components/parameters/totalResults"
+          },
+          {
+            "$ref": "#/components/parameters/q"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default Response.",
+            "content": {
+              "application/vnd.oracle.resource+json;type=collection": {
+                "schema": {
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/documents"
+                      }
+                    },
+                    "links": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/links"
+                      }
+                    }
+                  },
+                  "required": [
+                    "items"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Business Objects/Documents"
+        ],
+        "summary": "Create a Document",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/asyncHeader"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/vnd.oracle.resource+json;type=singular": {
+              "schema": {
+                "$ref": "#/components/schemas/documents"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "Default Response.",
+            "content": {
+              "application/vnd.oracle.resource+json;type=singular": {
+                "schema": {
+                  "$ref": "#/components/schemas/documents"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/documents/{documentGid}": {
+      "parameters": [
+        {
+          "name": "documentGid",
+          "in": "path",
+          "required": true,
+          "description": "Resource ID",
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "Business Objects/Documents"
+        ],
+        "summary": "Get a Document",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/expand"
+          },
+          {
+            "$ref": "#/components/parameters/fields"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default Response.",
+            "content": {
+              "application/vnd.oracle.resource+json;type=singular": {
+                "schema": {
+                  "$ref": "#/components/schemas/documents"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Business Objects/Documents"
+        ],
+        "summary": "Delete a Document",
+        "responses": {
+          "default": {
+            "description": "Default Response."
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Business Objects/Documents"
+        ],
+        "summary": "Update a Document",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/asyncHeader"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/vnd.oracle.resource+json; type=singular": {
+              "schema": {
+                "$ref": "#/components/schemas/patchSingularRequestBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "Default Response."
+          }
+        }
+      }
+    },
+    "/documents/{documentGid}/contexts": {
+      "parameters": [
+        {
+          "name": "documentGid",
+          "in": "path",
+          "required": true,
+          "description": "Resource ID",
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "Business Objects/Documents/Contexts"
+        ],
+        "summary": "Get Contexts",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/expand"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          },
+          {
+            "$ref": "#/components/parameters/orderBy"
+          },
+          {
+            "$ref": "#/components/parameters/fields"
+          },
+          {
+            "$ref": "#/components/parameters/totalResults"
+          },
+          {
+            "$ref": "#/components/parameters/q"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default Response.",
+            "content": {
+              "application/vnd.oracle.resource+json;type=collection": {
+                "schema": {
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/documents.contexts"
+                      }
+                    },
+                    "links": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/links"
+                      }
+                    }
+                  },
+                  "required": [
+                    "items"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Business Objects/Documents/Contexts"
+        ],
+        "summary": "Create a Context",
+        "requestBody": {
+          "content": {
+            "application/vnd.oracle.resource+json;type=singular": {
+              "schema": {
+                "$ref": "#/components/schemas/documents.contexts"
+              }
+            },
+            "application/vnd.oracle.resource+json;type=collection": {
+              "schema": {
+                "properties": {
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/documents.contexts"
+                    }
+                  }
+                },
+                "required": [
+                  "items"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "Default Response.",
+            "content": {
+              "application/vnd.oracle.resource+json;type=singular": {
+                "schema": {
+                  "$ref": "#/components/schemas/documents.contexts"
+                }
+              },
+              "application/vnd.oracle.resource+json;type=collection": {
+                "schema": {
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/documents.contexts"
+                      }
+                    },
+                    "links": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/links"
+                      }
+                    }
+                  },
+                  "required": [
+                    "items"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Business Objects/Documents/Contexts"
+        ],
+        "summary": "Update Contexts",
+        "requestBody": {
+          "content": {
+            "application/vnd.oracle.resource+json; type=collection": {
+              "schema": {
+                "properties": {
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/patchCollectionRequestBody"
+                    }
+                  }
+                },
+                "required": [
+                  "items"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "Default Response."
+          }
+        }
+      }
+    },
+    "/documents/{documentGid}/contexts/{documentContextQualGid}": {
+      "parameters": [
+        {
+          "name": "documentGid",
+          "in": "path",
+          "required": true,
+          "description": "Resource ID",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "documentContextQualGid",
+          "in": "path",
+          "required": true,
+          "description": "Resource ID",
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "Business Objects/Documents/Contexts"
+        ],
+        "summary": "Get a Context",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/expand"
+          },
+          {
+            "$ref": "#/components/parameters/fields"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default Response.",
+            "content": {
+              "application/vnd.oracle.resource+json;type=singular": {
+                "schema": {
+                  "$ref": "#/components/schemas/documents.contexts"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Business Objects/Documents/Contexts"
+        ],
+        "summary": "Delete a Context",
+        "responses": {
+          "default": {
+            "description": "Default Response."
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Business Objects/Documents/Contexts"
+        ],
+        "summary": "Update a Context",
+        "requestBody": {
+          "content": {
+            "application/vnd.oracle.resource+json; type=singular": {
+              "schema": {
+                "$ref": "#/components/schemas/patchSingularRequestBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "Default Response."
+          }
+        }
+      }
+    },
+    "/documents/{documentGid}/statuses": {
+      "parameters": [
+        {
+          "name": "documentGid",
+          "in": "path",
+          "required": true,
+          "description": "Resource ID",
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "Business Objects/Documents/Statuses"
+        ],
+        "summary": "Get Statuses",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/expand"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          },
+          {
+            "$ref": "#/components/parameters/orderBy"
+          },
+          {
+            "$ref": "#/components/parameters/fields"
+          },
+          {
+            "$ref": "#/components/parameters/totalResults"
+          },
+          {
+            "$ref": "#/components/parameters/q"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default Response.",
+            "content": {
+              "application/vnd.oracle.resource+json;type=collection": {
+                "schema": {
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/documents.statuses"
+                      }
+                    },
+                    "links": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/links"
+                      }
+                    }
+                  },
+                  "required": [
+                    "items"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Business Objects/Documents/Statuses"
+        ],
+        "summary": "Create a Status",
+        "requestBody": {
+          "content": {
+            "application/vnd.oracle.resource+json;type=singular": {
+              "schema": {
+                "$ref": "#/components/schemas/documents.statuses"
+              }
+            },
+            "application/vnd.oracle.resource+json;type=collection": {
+              "schema": {
+                "properties": {
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/documents.statuses"
+                    }
+                  }
+                },
+                "required": [
+                  "items"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "Default Response.",
+            "content": {
+              "application/vnd.oracle.resource+json;type=singular": {
+                "schema": {
+                  "$ref": "#/components/schemas/documents.statuses"
+                }
+              },
+              "application/vnd.oracle.resource+json;type=collection": {
+                "schema": {
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/documents.statuses"
+                      }
+                    },
+                    "links": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/links"
+                      }
+                    }
+                  },
+                  "required": [
+                    "items"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Business Objects/Documents/Statuses"
+        ],
+        "summary": "Update Statuses",
+        "requestBody": {
+          "content": {
+            "application/vnd.oracle.resource+json; type=collection": {
+              "schema": {
+                "properties": {
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/patchCollectionRequestBody"
+                    }
+                  }
+                },
+                "required": [
+                  "items"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "Default Response."
+          }
+        }
+      }
+    },
+    "/documents/{documentGid}/statuses/{statusTypeGid}": {
+      "parameters": [
+        {
+          "name": "documentGid",
+          "in": "path",
+          "required": true,
+          "description": "Resource ID",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "statusTypeGid",
+          "in": "path",
+          "required": true,
+          "description": "Resource ID",
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "Business Objects/Documents/Statuses"
+        ],
+        "summary": "Get a Status",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/expand"
+          },
+          {
+            "$ref": "#/components/parameters/fields"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default Response.",
+            "content": {
+              "application/vnd.oracle.resource+json;type=singular": {
+                "schema": {
+                  "$ref": "#/components/schemas/documents.statuses"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Business Objects/Documents/Statuses"
+        ],
+        "summary": "Delete a Status",
+        "responses": {
+          "default": {
+            "description": "Default Response."
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Business Objects/Documents/Statuses"
+        ],
+        "summary": "Update a Status",
+        "requestBody": {
+          "content": {
+            "application/vnd.oracle.resource+json; type=singular": {
+              "schema": {
+                "$ref": "#/components/schemas/patchSingularRequestBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "Default Response."
+          }
+        }
+      }
+    },
+    "/documents/{documentGid}/cmsParams": {
+      "parameters": [
+        {
+          "name": "documentGid",
+          "in": "path",
+          "required": true,
+          "description": "Resource ID",
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "Business Objects/Documents/CMS Parameters"
+        ],
+        "summary": "Get CMS Parameters",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/expand"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          },
+          {
+            "$ref": "#/components/parameters/orderBy"
+          },
+          {
+            "$ref": "#/components/parameters/fields"
+          },
+          {
+            "$ref": "#/components/parameters/totalResults"
+          },
+          {
+            "$ref": "#/components/parameters/q"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default Response.",
+            "content": {
+              "application/vnd.oracle.resource+json;type=collection": {
+                "schema": {
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/documents.cmsParams"
+                      }
+                    },
+                    "links": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/links"
+                      }
+                    }
+                  },
+                  "required": [
+                    "items"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Business Objects/Documents/CMS Parameters"
+        ],
+        "summary": "Create a CMS Parameter",
+        "requestBody": {
+          "content": {
+            "application/vnd.oracle.resource+json;type=singular": {
+              "schema": {
+                "$ref": "#/components/schemas/documents.cmsParams"
+              }
+            },
+            "application/vnd.oracle.resource+json;type=collection": {
+              "schema": {
+                "properties": {
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/documents.cmsParams"
+                    }
+                  }
+                },
+                "required": [
+                  "items"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "Default Response.",
+            "content": {
+              "application/vnd.oracle.resource+json;type=singular": {
+                "schema": {
+                  "$ref": "#/components/schemas/documents.cmsParams"
+                }
+              },
+              "application/vnd.oracle.resource+json;type=collection": {
+                "schema": {
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/documents.cmsParams"
+                      }
+                    },
+                    "links": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/links"
+                      }
+                    }
+                  },
+                  "required": [
+                    "items"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Business Objects/Documents/CMS Parameters"
+        ],
+        "summary": "Update CMS Parameters",
+        "requestBody": {
+          "content": {
+            "application/vnd.oracle.resource+json; type=collection": {
+              "schema": {
+                "properties": {
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/patchCollectionRequestBody"
+                    }
+                  }
+                },
+                "required": [
+                  "items"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "Default Response."
+          }
+        }
+      }
+    },
+    "/documents/{documentGid}/cmsParams/{paramName}": {
+      "parameters": [
+        {
+          "name": "documentGid",
+          "in": "path",
+          "required": true,
+          "description": "Resource ID",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "paramName",
+          "in": "path",
+          "required": true,
+          "description": "Resource ID",
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "Business Objects/Documents/CMS Parameters"
+        ],
+        "summary": "Get a CMS Parameter",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/expand"
+          },
+          {
+            "$ref": "#/components/parameters/fields"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default Response.",
+            "content": {
+              "application/vnd.oracle.resource+json;type=singular": {
+                "schema": {
+                  "$ref": "#/components/schemas/documents.cmsParams"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Business Objects/Documents/CMS Parameters"
+        ],
+        "summary": "Delete a CMS Parameter",
+        "responses": {
+          "default": {
+            "description": "Default Response."
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Business Objects/Documents/CMS Parameters"
+        ],
+        "summary": "Update a CMS Parameter",
+        "requestBody": {
+          "content": {
+            "application/vnd.oracle.resource+json; type=singular": {
+              "schema": {
+                "$ref": "#/components/schemas/patchSingularRequestBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "Default Response."
+          }
+        }
+      }
+    },
+    "/documents/{documentGid}/contents": {
+      "parameters": [
+        {
+          "name": "documentGid",
+          "in": "path",
+          "required": true,
+          "description": "Resource ID",
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "Business Objects/Documents/Contents"
+        ],
+        "summary": "Get Contents",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/expand"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          },
+          {
+            "$ref": "#/components/parameters/orderBy"
+          },
+          {
+            "$ref": "#/components/parameters/fields"
+          },
+          {
+            "$ref": "#/components/parameters/totalResults"
+          },
+          {
+            "$ref": "#/components/parameters/q"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default Response.",
+            "content": {
+              "application/vnd.oracle.resource+json;type=collection": {
+                "schema": {
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/documents.contents"
+                      }
+                    },
+                    "links": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/links"
+                      }
+                    }
+                  },
+                  "required": [
+                    "items"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Business Objects/Documents/Contents"
+        ],
+        "summary": "Create a Content",
+        "requestBody": {
+          "content": {
+            "application/vnd.oracle.resource+json;type=singular": {
+              "schema": {
+                "$ref": "#/components/schemas/documents.contents"
+              }
+            },
+            "application/vnd.oracle.resource+json;type=collection": {
+              "schema": {
+                "properties": {
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/documents.contents"
+                    }
+                  }
+                },
+                "required": [
+                  "items"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "Default Response.",
+            "content": {
+              "application/vnd.oracle.resource+json;type=singular": {
+                "schema": {
+                  "$ref": "#/components/schemas/documents.contents"
+                }
+              },
+              "application/vnd.oracle.resource+json;type=collection": {
+                "schema": {
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/documents.contents"
+                      }
+                    },
+                    "links": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/links"
+                      }
+                    }
+                  },
+                  "required": [
+                    "items"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/documents/{documentGid}/contents/{documentContentGid}": {
+      "parameters": [
+        {
+          "name": "documentGid",
+          "in": "path",
+          "required": true,
+          "description": "Resource ID",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "documentContentGid",
+          "in": "path",
+          "required": true,
+          "description": "Resource ID",
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "Business Objects/Documents/Contents"
+        ],
+        "summary": "Get a Content",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/expand"
+          },
+          {
+            "$ref": "#/components/parameters/fields"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default Response.",
+            "content": {
+              "application/vnd.oracle.resource+json;type=singular": {
+                "schema": {
+                  "$ref": "#/components/schemas/documents.contents"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/custom-actions/download/documents/{document gid}/contents/{document content gid}": {
+      "post": {
+        "tags": [
+          "Actions/Business Actions/Documents"
+        ],
+        "summary": "Download the raw document content",
+        "description": "Access to the actual document content for download, however, is managed via the \"contents\" child resource of the \"documents\" root resource. The child resource will contain a \"canonical\" link reference where the content can be downloaded using an HTTP POST or GET. This will return the content according to the media type stored with the document definition.",
+        "parameters": [
+          {
+            "name": "document gid",
+            "in": "path",
+            "required": true,
+            "description": "The Document GID.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "document content gid",
+            "in": "path",
+            "required": true,
+            "description": "The Document Content GID.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Content successfully returned as message body with content matching the Content-Type header."
+          }
+        }
+      }
+    },
+    "/custom-actions/upload/documents/{document gid}/contents": {
+      "post": {
+        "tags": [
+          "Actions/Business Actions/Documents"
+        ],
+        "summary": "Upload raw document content",
+        "description": "Adds document content to an existing document. The Content-Type header for the HTTP POST must match the type of content being uploaded.\nThis content will be scanned for viruses and the content verified to match the specified type.\nOnly one document content can be created for an existing document.",
+        "parameters": [
+          {
+            "name": "document gid",
+            "in": "path",
+            "required": true,
+            "description": "The Document GID.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "*/*": {}
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Indicates document content has been successfully uploaded and validated."
+          },
+          "400": {
+            "description": "Indicates document content already exists for the specified document."
+          },
+          "404": {
+            "description": "Indicates the specified document does not exist."
+          },
+          "405": {
+            "description": "Indicates the operation being attempted was not supported."
+          },
+          "500": {
+            "description": "Indicates there was an internal persistence error and to check the application exception logs."
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "documents": {
+        "properties": {
+          "documentGid": {
+            "description": "No description.",
+            "type": "string"
+          },
+          "documentXid": {
+            "description": "No description.",
+            "type": "string"
+          },
+          "documentDefGid": {
+            "description": "No description.",
+            "type": "string"
+          },
+          "documentUrl": {
+            "description": "No description.",
+            "type": "string",
+            "readOnly": true
+          },
+          "documentType": {
+            "description": "No description.",
+            "type": "string",
+            "readOnly": true
+          },
+          "documentMimeType": {
+            "description": "No description. This attribute is marked as Create-Only.",
+            "type": "string"
+          },
+          "documentFilename": {
+            "description": "No description.",
+            "type": "string"
+          },
+          "ownerDataQueryTypeGid": {
+            "description": "No description.",
+            "type": "string"
+          },
+          "ownerObjectGid": {
+            "description": "No description.",
+            "type": "string"
+          },
+          "domainName": {
+            "description": "No description.",
+            "type": "string"
+          },
+          "reportGid": {
+            "description": "The report associated with the document attachment, if content was generated by the report subsystem.",
+            "type": "string"
+          },
+          "generatedAt": {
+            "description": "If preparation, date/time content was last generated",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/dateTimeType"
+              }
+            ]
+          },
+          "uploadedAt": {
+            "description": "If attachment, date/time content was last updated",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/dateTimeType"
+              }
+            ]
+          },
+          "documentTrackingNum": {
+            "description": "No description.",
+            "type": "string"
+          },
+          "documentCmsId": {
+            "description": "A GUID to associate the document with content stored on its remote CMS. Valid when document_type=CMS.",
+            "type": "string",
+            "readOnly": true
+          },
+          "contentManagementSystemGid": {
+            "description": "No description.",
+            "type": "string"
+          },
+          "usedAs": {
+            "description": "Represents the classification of a document.(C/I/L/T)",
+            "type": "string"
+          },
+          "relatedDocumentGid": {
+            "description": "Represents the related document for consolidated/linked documents.",
+            "type": "string"
+          },
+          "effectiveDate": {
+            "description": "represents effective date for a document",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/dateType"
+              }
+            ]
+          },
+          "expirationDate": {
+            "description": "Represents expiration date for a document.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/dateType"
+              }
+            ]
+          },
+          "userDefined1IconGid": {
+            "description": "No description.",
+            "type": "string"
+          },
+          "userDefined2IconGid": {
+            "description": "No description.",
+            "type": "string"
+          },
+          "userDefined3IconGid": {
+            "description": "No description.",
+            "type": "string"
+          },
+          "userDefined4IconGid": {
+            "description": "No description.",
+            "type": "string"
+          },
+          "userDefined5IconGid": {
+            "description": "No description.",
+            "type": "string"
+          },
+          "updateDate": {
+            "description": "update date",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/dateType"
+              }
+            ],
+            "readOnly": true
+          },
+          "insertDate": {
+            "description": "insert date",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/dateType"
+              }
+            ],
+            "readOnly": true
+          },
+          "contexts": {
+            "properties": {
+              "items": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/documents.contexts"
+                }
+              },
+              "links": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/links"
+                },
+                "readOnly": true
+              }
+            }
+          },
+          "statuses": {
+            "properties": {
+              "items": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/documents.statuses"
+                }
+              },
+              "links": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/links"
+                },
+                "readOnly": true
+              }
+            }
+          },
+          "cmsParams": {
+            "properties": {
+              "items": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/documents.cmsParams"
+                }
+              },
+              "links": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/links"
+                },
+                "readOnly": true
+              }
+            }
+          },
+          "contents": {
+            "properties": {
+              "items": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/documents.contents"
+                }
+              },
+              "links": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/links"
+                },
+                "readOnly": true
+              }
+            }
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/links"
+            },
+            "readOnly": true
+          }
+        }
+      },
+      "documents.contexts": {
+        "properties": {
+          "documentContextQualGid": {
+            "description": "Represents the document context qualifier.",
+            "type": "string"
+          },
+          "domainName": {
+            "description": "No description.",
+            "type": "string"
+          },
+          "documentContextValue": {
+            "description": "Represents the value of a document context qualifier.",
+            "type": "string"
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/links"
+            },
+            "readOnly": true
+          }
+        }
+      },
+      "documents.statuses": {
+        "properties": {
+          "statusTypeGid": {
+            "description": "No description.",
+            "type": "string"
+          },
+          "statusValueGid": {
+            "description": "No description.",
+            "type": "string"
+          },
+          "domainName": {
+            "description": "No description.",
+            "type": "string"
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/links"
+            },
+            "readOnly": true
+          }
+        }
+      },
+      "documents.cmsParams": {
+        "properties": {
+          "paramName": {
+            "description": "Parameter name",
+            "type": "string"
+          },
+          "paramValue": {
+            "description": "Parameter value",
+            "type": "string"
+          },
+          "domainName": {
+            "description": "No description.",
+            "type": "string"
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/links"
+            },
+            "readOnly": true
+          }
+        }
+      },
+      "documents.contents": {
+        "properties": {
+          "documentContentGid": {
+            "description": "NOTE: This column should not have an FK to OCUMENT_CONTENT. The DOCUMENT_CONTENT table may be stored in a different instance or schema.",
+            "type": "string"
+          },
+          "domainName": {
+            "description": "No description.",
+            "type": "string"
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/links"
+            },
+            "readOnly": true
+          }
+        }
+      },
+      "errorResponse": {
+        "properties": {
+          "status": {
+            "description": "HTTP status code.",
+            "type": "number"
+          },
+          "title": {
+            "description": "Provides a short summary message.",
+            "type": "string"
+          },
+          "detail": {
+            "description": "Provides more information about the error.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "status",
+          "title",
+          "detail"
+        ]
+      },
+      "links": {
+        "properties": {
+          "rel": {
+            "type": "string"
+          },
+          "href": {
+            "type": "string"
+          }
+        }
+      },
+      "amountType": {
+        "properties": {
+          "value": {
+            "description": "Numeric value that specifies an amount",
+            "type": "number"
+          },
+          "unit": {
+            "description": "Unit of measure",
+            "type": "string"
+          }
+        }
+      },
+      "dateType": {
+        "properties": {
+          "value": {
+            "description": "Date in ISO 8601 format",
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "dateTimeType": {
+        "properties": {
+          "value": {
+            "description": "Date in ISO 8601 format",
+            "type": "string",
+            "format": "date-time"
+          },
+          "timezone": {
+            "description": "Timezone in Olson database format",
+            "type": "string"
+          }
+        }
+      },
+      "currencyType": {
+        "properties": {
+          "value": {
+            "description": "Numeric value that specifies a currency",
+            "type": "number"
+          },
+          "currency": {
+            "description": "ISO 4217 currency code",
+            "type": "string"
+          }
+        }
+      },
+      "patchSingularRequestBody": {
+        "properties": {
+          "<Attribute Name>": {
+            "description": "Attribute value",
+            "oneOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "boolean"
+              }
+            ]
+          }
+        },
+        "required": [
+          "<Attribute Name>"
+        ]
+      },
+      "patchCollectionRequestBody": {
+        "properties": {
+          "<resource ID>": {
+            "description": "Id of the resource whose attribute(s) needs to be updated",
+            "oneOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "string"
+              }
+            ]
+          },
+          "<Attribute Name>": {
+            "description": "Attribute that needs to be updated",
+            "oneOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "boolean"
+              }
+            ]
+          }
+        },
+        "required": [
+          "<resource ID>",
+          "<Attribute Name>"
+        ]
+      },
+      "asyncResponse": {
+        "properties": {
+          "startTime": {
+            "description": "Time at which the transaction starts.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/dateType"
+              }
+            ]
+          },
+          "progress": {
+            "description": "Indicates the completion status of the message.",
+            "type": "string",
+            "enum": [
+              "processing",
+              "failed",
+              "succeeded"
+            ]
+          },
+          "complete": {
+            "description": "Indicates the completion status of the message.",
+            "type": "boolean"
+          },
+          "endTime": {
+            "description": "Time at which the transaction ended.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/dateType"
+              }
+            ]
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/links"
+            }
+          }
+        }
+      },
+      "actionRequest": {
+        "properties": {
+          "responsiblePartyGid": {
+            "description": "Describes the person or people that will be affected by the action.",
+            "type": "string"
+          },
+          "statusCodeGid": {
+            "description": "A code associated with the action to be performed.",
+            "type": "string"
+          },
+          "reasonCodeGid": {
+            "description": "A code describing the reason for the action.",
+            "type": "string"
+          },
+          "pks": {
+            "description": "Object primary keys that supports one or more multi-part (compound) keys",
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "actionResponse": {
+        "properties": {
+          "success": {
+            "description": "Success or failure.",
+            "type": "string"
+          }
+        }
+      },
+      "q": {
+        "properties": {
+          "q": {
+            "description": "Filter (a 'where'clause) to restrict the items returned in the collection. By default, no filtering is applied.",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "parameters": {
+      "expand": {
+        "name": "expand",
+        "in": "query",
+        "required": false,
+        "description": "Comma-delimited string of child resource names that you want to expand so that the contents return with the parent in the same GET request.",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "limit": {
+        "name": "limit",
+        "in": "query",
+        "required": false,
+        "description": "Positive integer value that specifies the maximum number of items returned by the server.",
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "offset": {
+        "name": "offset",
+        "in": "query",
+        "required": false,
+        "description": "Non-negative integer values that specifies the index of the first item to be returned. The offset index begins at 0. By default, the offset is 0, which returns all items starting from the first item in the collection.",
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "orderBy": {
+        "name": "orderBy",
+        "in": "query",
+        "required": false,
+        "description": "Comma-separated string of field names, each optionally followed by asc or desc, that specifies the order of items returned in the response payload.",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "fields": {
+        "name": "fields",
+        "in": "query",
+        "required": false,
+        "description": "Comma-delimited string of field names that you wanted returned in a GET request.",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "totalResults": {
+        "name": "totalResults",
+        "in": "query",
+        "required": false,
+        "description": "Boolean value that specifies whether to calculate the totalResults property. By default, this value is set to false indicating that totalResults is not calculated.",
+        "schema": {
+          "type": "boolean"
+        }
+      },
+      "q": {
+        "name": "q",
+        "in": "query",
+        "required": false,
+        "description": "Filter (a 'where'clause) to restrict the items returned in the collection. By default, no filtering is applied.",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "asyncHeader": {
+        "name": "Prefer",
+        "in": "header",
+        "required": false,
+        "description": "An optional header parameter that allows you to process the request asynchronously. Set the request header \"Prefer\" to \"respond-async\" for asynchronous processing. For synchronous processing, leave the parameter blank or do not define it.",
+        "schema": {
+          "type": "string",
+          "enum": [
+            "respond-async"
+          ]
+        }
+      },
+      "transientHeader": {
+        "name": "Prefer Transient Header",
+        "in": "header",
+        "required": false,
+        "description": "A header parameter that allows you to execute queries. Set the request header \"Prefer\" to \"transient\" to explicitly declare that the query should be executed.",
+        "schema": {
+          "type": "string",
+          "enum": [
+            "transient"
+          ]
+        }
+      }
+    }
+  }
+}

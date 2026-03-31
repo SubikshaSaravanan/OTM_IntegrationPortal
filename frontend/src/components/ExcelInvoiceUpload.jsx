@@ -21,7 +21,7 @@ export default function ExcelInvoiceUpload({ onSuccess }) {
       setLoading(true);
       setError(null);
 
-      const res = await api.post("/invoice/excel", formData, {
+      const res = await api.post("/invoice/upload", formData, {
         headers: { "Content-Type": "multipart/form-data" }
       });
 

@@ -1,0 +1,58 @@
+{
+  "servprovAliasQualGid": "GLOG",
+  "servprovAliasValue": "INTL.NAFT",
+  "statusLevel": "SHIPMENT",
+  "statusCodeGid": "CP",
+  "timeZoneGid": "Asia/Calcutta",
+  "eventdate": {
+    "value": "2025-03-04T09:03:02+05:30"
+  },
+  "statusReasonCodeGid": "NS",
+  "responsiblePartyGid": "CARRIER",
+  "origTransactionNo": 51219014,
+  "eventReceivedDate": {
+    "value": "2025-09-26T11:21:02Z"
+  },
+  "domainName": "INTL",
+  "shipmentStatusType": "SHIPMENT",
+  "updateDate": {
+    "value": "2025-09-26T11:21:02Z"
+  },
+  "insertDate": {
+    "value": "2025-09-26T11:21:02Z"
+  },
+  "shipmentRefnums": {
+    "links": [
+      {
+        "rel": "self",
+        "href": "https://otmgtm-test-hipro.otmgtm.us-phoenix-1.ocs.oraclecloud.com:443/logisticsRestApi/resources-int/v2/trackingEvents/51219014/shipmentRefnums"
+      }
+    ]
+  },
+  "stops": {
+    "links": [
+      {
+        "rel": "self",
+        "href": "https://otmgtm-test-hipro.otmgtm.us-phoenix-1.ocs.oraclecloud.com:443/logisticsRestApi/resources-int/v2/trackingEvents/51219014/stops"
+      }
+    ]
+  },
+  "matchedShipments": {
+    "links": [
+      {
+        "rel": "self",
+        "href": "https://otmgtm-test-hipro.otmgtm.us-phoenix-1.ocs.oraclecloud.com:443/logisticsRestApi/resources-int/v2/trackingEvents/51219014/matchedShipments"
+      }
+    ]
+  },
+  "links": [
+    {
+      "rel": "self",
+      "href": "https://otmgtm-test-hipro.otmgtm.us-phoenix-1.ocs.oraclecloud.com:443/logisticsRestApi/resources-int/v2/trackingEvents/51219014"
+    },
+    {
+      "rel": "canonical",
+      "href": "https://otmgtm-test-hipro.otmgtm.us-phoenix-1.ocs.oraclecloud.com:443/logisticsRestApi/resources-int/v2/trackingEvents/51219014"
+    }
+  ]
+}

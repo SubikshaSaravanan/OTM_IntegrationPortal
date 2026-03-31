@@ -12,7 +12,8 @@ export default function Login() {
     e.preventDefault();
     try {
       setLoading(true);
-      await axios.post("http://localhost:5000/api/auth/login", {
+      const baseURL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api";
+      await axios.post(`${baseURL}/auth/login`, {
         username,
         password,
       });

@@ -1,0 +1,30 @@
+{
+  "message": "Tracking event created",
+  "event": {
+    "statusCodeGid": "D1",
+    "eventdate": {
+      "value": "2026-03-30T04:30:00Z"
+    },
+    "statusReasonCodeGid": "NS",
+    "responsiblePartyGid": "CARRIER",
+    "eventReceivedDate": {
+      "value": "2026-03-30T05:04:54Z"
+    },
+    "shipmentGid": "INTL.111000",
+    "domainName": "INTL",
+    "insertDate": {
+      "value": "2026-03-30T05:04:56Z"
+    },
+    "links": [
+      {
+        "rel": "self",
+        "href": "https://otmgtm-test-hipro.otmgtm.us-phoenix-1.ocs.oraclecloud.com:443/logisticsRestApi/resources-int/v2/trackingEvents/51264005"
+      },
+      {
+        "rel": "canonical",
+        "href": "https://otmgtm-test-hipro.otmgtm.us-phoenix-1.ocs.oraclecloud.com:443/logisticsRestApi/resources-int/v2/trackingEvents/51264005"
+      }
+    ]
+  },
+  "eventGid": ""
+}

@@ -6,12 +6,9 @@ import Landing from "./Pages/Landing";
 import Invoice from "./Pages/Invoice";
 import InvoiceJson from "./Pages/InvoiceJson";
 import InvoiceTemplate from "./Pages/InvoiceTemplate";
-import InvoiceJson from "./Pages/InvoiceJson";
-import InvoiceTemplate from "./Pages/InvoiceTemplate";
 import Items from "./Pages/ItemCreate";
 import Setting from "./Pages/FieldConfigManager";
-
-import Setting from "./Pages/FieldConfigManager";
+import ShipmentTracking from "./Pages/ShipmentTracking";
 
 import Navbar from "./components/Navbar";
 import PrivateRoute from "./components/PrivateRoute";
@@ -90,6 +87,16 @@ export default function App() {
           element={
             <PrivateRoute>
               <Items />
+            </PrivateRoute>
+          }
+        />
+
+        {/* ================= SHIPMENT TRACKING ================= */}
+        <Route
+          path="/tracking"
+          element={
+            <PrivateRoute>
+              <ShipmentTracking />
             </PrivateRoute>
           }
         />

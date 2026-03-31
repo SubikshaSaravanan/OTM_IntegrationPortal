@@ -129,4 +129,32 @@ def get_transmission_error_report(transmission_no):
 
         errors.append(f"{code} : {decoded_msg}")
 
-    return "\n".join(errors)
+
+# ============================================================
+# FETCH OTM METADATA (DEFINITIONS)
+# ============================================================
+def get_invoice_definitions():
+    """
+    Fetches Invoice Metadata (Schema) from OTM.
+    Returns the raw JSON response or None if failed.
+    """
+    url = Config.OTM_INVOICE_METADATA_URL
+    print(f"🔍 Fetching Metadata from: {url}")
+    
+    try:
+        response = requests.get(
+            url,
+            auth=(Config.OTM_USERNAME, Config.OTM_PASSWORD),
+            headers={"Accept": "application/json"},
+            timeout=30
+        )
+        
+        if response.status_code == 200:
+            return response.json()
+        else:
+            print(f"⚠️ OTM Metadata Fetch Failed: {response.status_code} - {response.text}")
+            return None
+            
+    except Exception as e:
+        print(f"❌ Error fetching OTM metadata: {e}")
+        return None

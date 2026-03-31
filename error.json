@@ -1,0 +1,16 @@
+{
+  "status": 409,
+  "title": "Conflict",
+  "detail": "The request could not be completed due to a conflict with the current state of the resource.",
+  "o:errorDetails": [
+    {
+      "title": "SQLIntegrityConstraintViolationException",
+      "o:errorCode": "2291",
+      "o:errorDetails": [
+        {
+          "title": "OracleDatabaseException"
+        }
+      ]
+    }
+  ]
+}

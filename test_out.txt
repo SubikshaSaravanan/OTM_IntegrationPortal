@@ -1,0 +1,50 @@
+Extracting text via OCR Processor...
+PyTesseract failed (tesseract is not installed or it's not in your PATH. See README file for more information.), falling back to Gemini OCR...
+RAW TEXT:
+INVOICE
+
+From: To:
+Service Provider: INTL.T1_ARFW Domain: INTL
+
+Invoice Number: T1_ARFW_000005
+Invoice Date: 2026-02-12 16:05:56
+Currency: INR
+
+Line Items:
+1. Ref Num: INTL.111000 Desc: B Cost Type: B 3155.33
+2. Ref Num: INTL.111000 Desc: A Cost Type: A 200.00
+
+Total Amount: 3355.33
+
+Additional Info:
+Tax ID: GST-8877-XX
+Payment Terms: Net 30 Days (Due 2026-03-14)
+Notes: Please process ASAP. This is an urgent expedited shipment.
+--------------------------------------------------
+Parsing via LLM...
+JSON OUTPUT:
+{
+  "additionalMetadata": {
+    "Tax ID": "GST-8877-XX",
+    "Payment Terms": "Net 30 Days (Due 2026-03-14)",
+    "Notes": "Please process ASAP. This is an urgent expedited shipment."
+  },
+  "amount": "3355.33",
+  "currencyGid": "INR",
+  "invoiceDate": "2026-02-12",
+  "invoiceNumber": "T1_ARFW_000005",
+  "items": [
+    {
+      "amount": "3155.33",
+      "costTypeGid": "B",
+      "shipmentGid": "INTL.111000"
+    },
+    {
+      "amount": "200.00",
+      "costTypeGid": "A",
+      "shipmentGid": "INTL.111000"
+    }
+  ],
+  "serviceProvider": "INTL.T1_ARFW",
+  "domainName": "INTL"
+}

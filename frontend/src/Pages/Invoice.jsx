@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import InvoiceToggle from "../components/InvoiceToggle";
+import PhysicalInvoiceUpload from "../components/PhysicalInvoiceUpload";
 
 import {
   RefreshCcw,
@@ -23,6 +24,7 @@ export default function Invoice() {
 
   const [excelFile, setExcelFile] = useState(null);
   const [processType, setProcessType] = useState("xml");
+  const [uploadMode, setUploadMode] = useState("excel"); // 'excel' | 'physical'
 
   // Template Selection State
   const [templates, setTemplates] = useState([]);
@@ -30,7 +32,7 @@ export default function Invoice() {
   const [selectedTemplateId, setSelectedTemplateId] = useState("");
   const [fetchingTemplates, setFetchingTemplates] = useState(false);
 
-  const API = "http://localhost:5000/api";
+  const API = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api";
   const navigate = useNavigate();
   const fileInputRef = useRef(null);
 
@@ -238,6 +240,20 @@ export default function Invoice() {
       <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-200 mb-8">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-xl font-bold text-slate-800">Process New Invoice</h2>
+          <div className="flex bg-slate-100 p-1 rounded-lg">
+            <button
+              onClick={() => setUploadMode("excel")}
+              className={`px-4 py-1.5 rounded-md text-xs font-bold transition-all ${uploadMode === "excel" ? "bg-white text-indigo-600 shadow-sm" : "text-slate-500 hover:text-slate-700"}`}
+            >
+              Excel Upload
+            </button>
+            <button
+              onClick={() => setUploadMode("physical")}
+              className={`px-4 py-1.5 rounded-md text-xs font-bold transition-all ${uploadMode === "physical" ? "bg-white text-indigo-600 shadow-sm" : "text-slate-500 hover:text-slate-700"}`}
+            >
+              Physical Invoice (OCR)
+            </button>
+          </div>
           <button
             onClick={() => navigate("/invoice/template")}
             className="flex items-center gap-2 bg-slate-700 text-white px-4 py-2 rounded-lg hover:bg-slate-800 transition-colors shadow-sm font-medium text-sm"
@@ -247,94 +263,109 @@ export default function Invoice() {
           </button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-end">
-          {/* FILE PICKER */}
-          <div className="space-y-2">
-            <label className="block text-sm font-semibold text-slate-700">Select Excel Document</label>
-            <div className="flex gap-2">
-              <input
-                type="file"
-                ref={fileInputRef}
-                className="hidden"
-                accept=".xlsx,.xls"
-                onClick={(e) => { e.target.value = null; }}
-                onChange={(e) => {
-                  const file = e.target.files[0];
-                  if (file) setExcelFile(file);
-                }}
-              />
-              <button
-                type="button"
-                onClick={() => fileInputRef.current?.click()}
-                className="flex-1 flex items-center justify-center gap-2 bg-white border-2 border-dashed border-slate-300 px-4 py-2.5 rounded-lg text-slate-600 hover:border-indigo-500 hover:text-indigo-600 transition-all font-medium cursor-pointer"
+
+        {uploadMode === "excel" ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-end animate-in fade-in duration-300">
+            {/* FILE PICKER */}
+            <div className="space-y-2">
+              <label className="block text-sm font-semibold text-slate-700">Select Excel Document</label>
+              <div className="flex gap-2">
+                <input
+                  type="file"
+                  ref={fileInputRef}
+                  className="hidden"
+                  accept=".xlsx,.xls"
+                  onClick={(e) => { e.target.value = null; }}
+                  onChange={(e) => {
+                    const file = e.target.files[0];
+                    if (file) setExcelFile(file);
+                  }}
+                />
+                <button
+                  type="button"
+                  onClick={() => fileInputRef.current?.click()}
+                  className="flex-1 flex items-center justify-center gap-2 bg-white border-2 border-dashed border-slate-300 px-4 py-2.5 rounded-lg text-slate-600 hover:border-indigo-500 hover:text-indigo-600 transition-all font-medium cursor-pointer"
+                >
+                  <FolderOpen size={18} />
+                  {excelFile ? "Change Document" : "Browse Document"}
+                </button>
+              </div>
+              {excelFile && (
+                <div className="flex items-center gap-2 text-xs text-emerald-600 font-medium mt-1">
+                  <Check size={14} />
+                  {excelFile.name}
+                </div>
+              )}
+            </div>
+
+            {/* TEMPLATE DROPDOWN */}
+            <div className="space-y-2">
+              <label className="block text-sm font-semibold text-slate-700">Invoice Template</label>
+              <select
+                value={selectedTemplateId}
+                onChange={(e) => setSelectedTemplateId(e.target.value)}
+                className="w-full bg-white border border-slate-200 rounded-lg px-4 py-2.5 outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all text-sm font-medium"
               >
-                <FolderOpen size={18} />
-                {excelFile ? "Change Document" : "Browse Document"}
+                <option value="">Default Mapping (Manual)</option>
+                {templates.map(t => (
+                  <option key={t.id} value={t.id}>{t.name}</option>
+                ))}
+              </select>
+            </div>
+
+            {/* PROCESS TYPE & BUTTON */}
+            <div className="space-y-2">
+              <div className="flex justify-between items-center px-1">
+                <label className="text-sm font-semibold text-slate-700">Output Format</label>
+                <div className="flex gap-4">
+                  <label className="flex items-center gap-2 cursor-pointer text-sm">
+                    <input
+                      type="radio"
+                      checked={processType === "xml"}
+                      onChange={() => setProcessType("xml")}
+                      className="text-indigo-600 focus:ring-indigo-500"
+                    />
+                    XML
+                  </label>
+                  <label className="flex items-center gap-2 cursor-pointer text-sm">
+                    <input
+                      type="radio"
+                      checked={processType === "json"}
+                      onChange={() => setProcessType("json")}
+                      className="text-indigo-600 focus:ring-indigo-500"
+                    />
+                    JSON
+                  </label>
+                </div>
+              </div>
+              <button
+                onClick={confirmUpload}
+                disabled={loading || (!excelFile && !selectedTemplateId)}
+                className={`w-full bg-indigo-600 text-white px-5 py-2.5 rounded-lg font-bold shadow-md hover:bg-indigo-700 active:scale-[0.98] transition-all flex items-center justify-center gap-2 ${(loading || (!excelFile && !selectedTemplateId)) ? 'opacity-50 cursor-not-allowed' : ''}`}
+              >
+                {loading ? <Loader2 size={18} className="animate-spin" /> : <Upload size={18} />}
+                {excelFile ? "Process & Upload Document" : "Process Template only"}
               </button>
+              {!excelFile && selectedTemplateId && (
+                <p className="text-[10px] text-center text-slate-500 italic">
+                  Using template default values for processing.
+                </p>
+              )}
             </div>
-            {excelFile && (
-              <div className="flex items-center gap-2 text-xs text-emerald-600 font-medium mt-1">
-                <Check size={14} />
-                {excelFile.name}
-              </div>
-            )}
           </div>
-
-          {/* TEMPLATE DROPDOWN */}
-          <div className="space-y-2">
-            <label className="block text-sm font-semibold text-slate-700">Invoice Template</label>
-            <select
-              value={selectedTemplateId}
-              onChange={(e) => setSelectedTemplateId(e.target.value)}
-              className="w-full bg-white border border-slate-200 rounded-lg px-4 py-2.5 outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all text-sm font-medium"
-            >
-              <option value="">Default Mapping (Manual)</option>
-              {templates.map(t => (
-                <option key={t.id} value={t.id}>{t.name}</option>
-              ))}
-            </select>
+        ) : (
+          <div className="animate-in fade-in duration-300">
+            <PhysicalInvoiceUpload
+              templates={templates}
+              selectedTemplateId={selectedTemplateId}
+              onTemplateChange={(id) => setSelectedTemplateId(id)}
+              onSuccess={(res) => {
+                load();
+                showToast("Physical invoice processed successfully");
+              }}
+            />
           </div>
-
-          {/* PROCESS TYPE & BUTTON */}
-          <div className="space-y-2">
-            <div className="flex justify-between items-center px-1">
-              <label className="text-sm font-semibold text-slate-700">Output Format</label>
-              <div className="flex gap-4">
-                <label className="flex items-center gap-2 cursor-pointer text-sm">
-                  <input
-                    type="radio"
-                    checked={processType === "xml"}
-                    onChange={() => setProcessType("xml")}
-                    className="text-indigo-600 focus:ring-indigo-500"
-                  />
-                  XML
-                </label>
-                <label className="flex items-center gap-2 cursor-pointer text-sm">
-                  <input
-                    type="radio"
-                    checked={processType === "json"}
-                    onChange={() => setProcessType("json")}
-                    className="text-indigo-600 focus:ring-indigo-500"
-                  />
-                  JSON
-                </label>
-              </div>
-            </div>
-            <button
-              onClick={confirmUpload}
-              disabled={loading || (!excelFile && !selectedTemplateId)}
-              className={`w-full bg-indigo-600 text-white px-5 py-2.5 rounded-lg font-bold shadow-md hover:bg-indigo-700 active:scale-[0.98] transition-all flex items-center justify-center gap-2 ${(loading || (!excelFile && !selectedTemplateId)) ? 'opacity-50 cursor-not-allowed' : ''}`}
-            >
-              {loading ? <Loader2 size={18} className="animate-spin" /> : <Upload size={18} />}
-              {excelFile ? "Process & Upload Document" : "Process Template only"}
-            </button>
-            {!excelFile && selectedTemplateId && (
-              <p className="text-[10px] text-center text-slate-500 italic">
-                Using template default values for processing.
-              </p>
-            )}
-          </div>
-        </div>
+        )}
       </div>
 
       {/* SEARCH */}
@@ -369,9 +400,11 @@ export default function Invoice() {
 
               <td className="p-3">
                 <span
-                  className={`px-2 py-1 text-xs rounded ${i.source_type === "XML"
+                  className={`px-2 py-1 text-xs rounded font-bold ${i.source_type === "XML"
                     ? "bg-blue-100 text-blue-700"
-                    : "bg-purple-100 text-purple-700"
+                    : i.source_type === "PHYSICAL"
+                      ? "bg-orange-100 text-orange-700"
+                      : "bg-purple-100 text-purple-700"
                     }`}
                 >
                   {i.source_type}
@@ -448,6 +481,6 @@ export default function Invoice() {
       </table>
 
 
-    </div>
+    </div >
   );
 }

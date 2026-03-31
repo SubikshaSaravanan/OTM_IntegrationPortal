@@ -142,7 +142,8 @@ export default function Landing() {
                       )}
 
                       {/* Segregated Summary UI - Modern Redesign */}
-                      {t.summary && Array.isArray(t.summary) && (
+                      {Array.isArray(t.summary) && t.summary.length > 0 && (
+
                         <div className="mt-4 bg-black/50 backdrop-blur-3xl rounded-2xl p-4 border border-white/20 shadow-2xl space-y-4">
                           <div className={`grid ${t.summary.some(s => s.source) ? 'grid-cols-2 gap-6' : 'grid-cols-1'} relative`}>
                             {/* Visual Divider */}
