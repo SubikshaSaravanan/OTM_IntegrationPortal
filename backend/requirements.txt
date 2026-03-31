@@ -13,3 +13,5 @@ pdf2image==1.17.0
 Pillow==10.2.0
 gunicorn==23.0.0
 Flask-Migrate==4.0.7
+PyJWT==2.8.0
+Werkzeug==3.0.1
