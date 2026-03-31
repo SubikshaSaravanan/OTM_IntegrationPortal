@@ -3,10 +3,14 @@ import os
 class Config:
 
     # ================= DATABASE =================
-    SQLALCHEMY_DATABASE_URI = os.getenv(
+    _db_url = os.getenv(
         "DATABASE_URL",
         "postgresql://postgres:subi1234@localhost:5432/otm_invoice"
     )
+    if _db_url and _db_url.startswith("postgres://"):
+        _db_url = _db_url.replace("postgres://", "postgresql://", 1)
+    
+    SQLALCHEMY_DATABASE_URI = _db_url
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 

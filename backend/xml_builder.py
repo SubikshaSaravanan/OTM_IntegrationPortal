@@ -2,7 +2,7 @@ import pandas as pd
 from lxml import etree
 from datetime import datetime, UTC
 from dateutil import parser as date_parser
-from .fuzzy_matcher import find_column_fuzzy
+from fuzzy_matcher import find_column_fuzzy
 
 NS = "http://xmlns.oracle.com/apps/otm/transmission/v6.4"
 

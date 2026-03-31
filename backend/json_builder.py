@@ -1,7 +1,7 @@
 import pandas as pd
 from datetime import datetime
 from uuid import uuid4
-from .fuzzy_matcher import find_column_fuzzy
+from fuzzy_matcher import find_column_fuzzy
 
 
 def build_invoice_json_from_excel(excel_file, field_mapping=None):

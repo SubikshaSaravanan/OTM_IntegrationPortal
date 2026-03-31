@@ -7,9 +7,9 @@ import requests
 import mimetypes
 import shutil
 
-from .config import Config
-from .ocr_processor import extract_text_from_image as _text_from_image, extract_text_from_pdf
-from .otm_rest_service import (
+from config import Config
+from ocr_processor import extract_text_from_image as _text_from_image, extract_text_from_pdf
+from otm_rest_service import (
     get_otm_metadata, attach_document_to_otm, get_document_content_from_otm
 )
 
@@ -347,7 +347,7 @@ def create_tracking_event():
 
     # ── Attach POD document ────────────────────────────────────────────────
     if document_path and os.path.exists(document_path):
-        from .otm_rest_service import attach_document_to_otm
+        from otm_rest_service import attach_document_to_otm
         from datetime import datetime
         
         # New automated naming convention

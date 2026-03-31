@@ -1,6 +1,6 @@
-from .app import app
-from .database import db
-from .models import OtmObjectMetadata, MetadataField
+from app import app
+from database import db
+from models import OtmObjectMetadata, MetadataField
 import json
 
 def check_db():

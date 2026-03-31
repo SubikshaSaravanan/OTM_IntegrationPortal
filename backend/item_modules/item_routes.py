@@ -1,10 +1,10 @@
 import json
 from flask import Blueprint, request, jsonify
-from .item_model import FieldConfig, Template
+from item_model import FieldConfig, Template
 from io import BytesIO
 import pandas as pd
 from flask import send_file
-from .item_service import (
+from item_service import (
     create_item,
     get_otm_item_metadata,
     list_items

@@ -6,16 +6,16 @@ import base64
 import mimetypes
 import uuid
 
-from .json_builder import build_invoice_json_from_dataframe
-from .xml_builder import build_invoice_xml
+from json_builder import build_invoice_json_from_dataframe
+from xml_builder import build_invoice_xml
 
-from .otm_service import post_to_otm, get_invoice_definitions
-from .otm_rest_service import post_excel_json_invoice_to_otm, attach_document_to_invoice
+from otm_service import post_to_otm, get_invoice_definitions
+from otm_rest_service import post_excel_json_invoice_to_otm, attach_document_to_invoice
 
-from .models import Invoice
-from .database import db
-from .fuzzy_matcher import find_column_fuzzy
-from .ocr_processor import extract_text_from_image, extract_text_from_pdf, parse_invoice_text
+from models import Invoice
+from database import db
+from fuzzy_matcher import find_column_fuzzy
+from ocr_processor import extract_text_from_image, extract_text_from_pdf, parse_invoice_text
 
 invoice_upload_routes = Blueprint("invoice_upload_routes", __name__)
 
@@ -308,7 +308,7 @@ def extract_ocr():
             
         print(f"Extracted Raw Text Length: {len(raw_text)}")
         
-        from .llm_parser import parse_invoice_text_with_llm
+        from llm_parser import parse_invoice_text_with_llm
         extracted_data = parse_invoice_text_with_llm(raw_text)
 
         # Save persistent copy for OTM document upload at confirmation time
@@ -403,7 +403,7 @@ def confirm_physical():
         print("\n==================================================\n")
 
         # Create the Audit log BEFORE attempting to post to capture intent and early errors
-        from .models import PhysicalInvoiceAudit
+        from models import PhysicalInvoiceAudit
         
         audit_log = PhysicalInvoiceAudit(
             invoice_xid=json_payload["invoiceXid"],

@@ -1,1 +1,1 @@
-# Intelizz_Data_Management_Portal
+# Deployment Guide
