@@ -1,11 +1,12 @@
-import sys
 import os
+import sys
 
-# Add 'backend' directory to path so absolute imports like 'from database import db' work
+# Ensure backend modules can be imported directly
 backend_path = os.path.join(os.path.dirname(__file__), 'backend')
 if backend_path not in sys.path:
     sys.path.insert(0, backend_path)
 
+# Import the actual Flask app from the backend directory
 from backend.app import app
 
 if __name__ == "__main__":
