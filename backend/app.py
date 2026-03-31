@@ -1,9 +1,12 @@
 from flask import Flask
 from flask_cors import CORS
 import os
-from dotenv import load_dotenv
 
-load_dotenv()
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass  # On Render, env vars are set directly — dotenv not needed
 
 from .database import db, migrate
 from .config import Config
