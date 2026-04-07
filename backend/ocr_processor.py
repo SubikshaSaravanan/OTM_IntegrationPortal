@@ -33,6 +33,25 @@ def extract_text_from_pdf(pdf_path):
         text = ""
         for page in doc:
             text += page.get_text()
+            
+        if not text.strip():
+            print("PDF is scanned/empty. Using Gemini Vision OCR fallback...")
+            import google.generativeai as genai
+            from PIL import Image
+            import io
+            
+            # Render first page as image
+            page = doc.load_page(0)
+            pix = page.get_pixmap(dpi=150)
+            img = Image.open(io.BytesIO(pix.tobytes("png")))
+            
+            genai.configure(api_key=os.environ.get("GOOGLE_API_KEY"))
+            model = genai.GenerativeModel("gemini-2.5-flash")
+            response = model.generate_content([
+                "Extract all the text tightly and exactly from this document image. Leave out no text.", img
+            ])
+            return response.text
+
         return text
     except ImportError:
         return f"OCR PDF Error: PyMuPDF (fitz) is not installed."
